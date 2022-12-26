@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_23_123434) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_26_173338) do
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.integer "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "mark"
   end
 
   create_table "students", force: :cascade do |t|
@@ -23,11 +24,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_23_123434) do
     t.integer "student_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "projects_id"
-    t.index ["projects_id"], name: "index_students_on_projects_id"
   end
 
   add_foreign_key "projects", "students"
   add_foreign_key "projects", "students", on_delete: :cascade
-  add_foreign_key "students", "projects", column: "projects_id"
 end
