@@ -15,10 +15,12 @@ class Api::ProjectsController < ApplicationController
 
   # POST /projects
   def create
+    p project_params
     @project = Project.new(project_params)
+    # @project.student = @student
 
     if @project.save
-      render json: @project, status: :created, location: @project
+      render json: @project
     else
       render json: @project.errors, status: :unprocessable_entity
     end
@@ -36,6 +38,7 @@ class Api::ProjectsController < ApplicationController
   # DELETE /projects/1
   def destroy
     @project.destroy
+    render json: @project
   end
 
   private
@@ -46,6 +49,6 @@ class Api::ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :personId)
+      params.require(:project).permit(:name, :student_id, :mark)
     end
 end
